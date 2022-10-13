@@ -1,0 +1,19 @@
+@import '../../theme/theme-variable.scss';
+
+.toolbar{
+  background-color: $color-website;
+  color: $color-white;
+  background-image: linear-gradient(
+        to right,
+         #49D0Db 15%,
+         #870cd3,
+         $backgroundmix-color1
+        
+    );
+}
+  //  #24ACB6 10%,
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+li { list-style-type: none; }

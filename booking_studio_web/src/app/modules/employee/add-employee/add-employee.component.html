@@ -1,0 +1,45 @@
+<form id="dlgAddEmployee" class="dialog-confirmation" [formGroup]="addEmployeeForm">
+  <div class="dialog-confirmation-heading" mat-dialog-title>
+    <div class="text">Add Employee</div>
+  </div>
+  <div class="dialog-confirmation-content">
+    <div class="group">
+      <mat-label class="label">BagdeID</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="badgeId" readonly>
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">First Name</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+    </div><div class="group">
+      <mat-label class="label">Last Name</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Email</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="email">
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Image</mat-label>
+      <mat-form-field appearance="outline">
+        <ngx-mat-file-input formControlName="fileUpload" placeholder="Choose a file" [accept]="'image/jpeg, image/png'" [multiple]="false"></ngx-mat-file-input>
+        <mat-icon matSuffix>folder</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-dialog-actions class="action">
+    <button mat-flat-button class="button-cancel" matDialogClose="false">
+      Cancel
+    </button>
+    <button mat-flat-button class="button-save" (click)="clkSave()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

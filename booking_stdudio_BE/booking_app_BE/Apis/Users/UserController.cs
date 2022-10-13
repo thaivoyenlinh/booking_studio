@@ -4,13 +4,28 @@ using Microsoft.AspNetCore.Mvc;
 namespace booking_app_BE.Apis.Users
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("user")]
     public class UserController : ControllerBase
     {
-        [HttpGet, Authorize]
-        public IEnumerable<string> Get()
+        [HttpGet("administrators")]
+        [Authorize(Roles = "Administrator")]
+        public IEnumerable<string> GetAdministrators()
         {
-            return new string[] { "John Doe", "Jane Doe" };
+            return new string[] { "Administrator1", "Administrator2" };
+        }
+
+        [HttpGet("managers")]
+        [Authorize(Roles = "Manager")]
+        public IEnumerable<string> GetManagers()
+        {
+            return new string[] { "Manager1", "Manager2" };
+        }
+
+        [HttpGet("users")]
+        [Authorize(Roles = "User")]
+        public IEnumerable<string> GetUsers()
+        {
+            return new string[] { "User1", "User2", "User3" };
         }
     }
 }

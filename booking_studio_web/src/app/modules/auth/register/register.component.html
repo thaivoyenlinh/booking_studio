@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="sign-up-content">
+		<div class="name">
+			<span>Account Registration</span>
+		</div>
+		<form [formGroup]="AccountRegistrationForm" (ngSubmit)="onSubmit()">  
+
+			<!-- TODO input tag not show, must import this lib for form rendering properly in file styles.scss -->
+			<div class="form-group">
+				<mat-form-field>
+					<mat-label>Username</mat-label>
+					<input matInput formControlName="username">
+				</mat-form-field>
+			</div>
+
+      <div class="form-group">
+				<mat-form-field>
+					<mat-label>Password</mat-label>
+					<input matInput formControlName="password">
+				</mat-form-field>
+			</div>
+
+      <div class="form-group">
+				<mat-form-field>
+					<mat-label>Email</mat-label>
+					<input matInput formControlName="email">
+				</mat-form-field>
+			</div>
+      
+      <div class="form-group">
+				<div class="button">
+					<button mat-raised-button type="submit">Register</button>
+					<button mat-raised-button (click)="previous_page()">Back</button>
+				</div>
+			</div>
+
+		</form>		
+	</div>
+</div>

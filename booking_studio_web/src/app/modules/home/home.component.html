@@ -1,0 +1,11 @@
+<div *ngIf="!isUserAuthenticated()">
+  <app-header (toggleSideBarForMe)="sideBarToggler($event)" class="position-fixed"></app-header>
+  <mat-drawer-container class="body-layout">
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+      <app-sidebar></app-sidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

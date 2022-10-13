@@ -1,1 +1,143 @@
 /* You can add global styles to this file, and also import other style files */
+@import './app/shared/theme/theme-variable.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.body-layout{
+  max-height: 91.5%;
+}
+
+.page-title{
+  letter-spacing: 0.8px;
+  color: $color-website;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.button-main-flat{
+  background-color: $color-website;
+  color: $color-white;
+  font-size: 16px;
+}
+
+.button-save{
+  background-color: $color-website;
+  color: $color-white;
+}
+
+.button-cancel{
+  color: $color-website;
+  border: 1px solid $color-website !important;
+}
+
+.button-add{
+  letter-spacing: 0.5px;
+  padding: 3px 15px;
+}
+
+mat-paginator{
+  font-size: 10px;
+  background-color: $color-lightgrey !important;
+}
+
+//sorting
+
+.clickable{
+  cursor: pointer;
+}
+
+.sortable{
+  padding-right: 18px;
+  position: relative;
+}
+
+.sortable:before,
+.sortable:after{
+  border: 4px solid transparent;
+  content: '';
+  display: block;
+  height: 0;
+  right: 5px;
+  top: 50%;
+  position: absolute;
+  width: 0;
+}
+
+.sortable:before{
+  border-bottom-color: #aaa;
+  margin-top: -9px;
+}
+
+.sortable:after{
+  border-top-color: #aaa;
+  margin-top: 1px;
+}
+
+.sort-by-asc{
+  padding-right: 18px;
+  position: relative;
+}
+
+.sort-by-asc:before,
+.sort-by-asc:after{
+  border: 4px solid transparent;
+  content: '';
+  display: block;
+  height: 0;
+  right: 5px;
+  top: 50%;
+  position: absolute;
+  width: 0;
+}
+
+.sort-by-asc:before{
+  border-bottom-color: #666;
+  margin-top: -9px;
+}
+
+.sort-by-asc:after{
+  border-top-color: #aaa;
+  margin-top: 1px;
+}
+
+.sort-by-desc{
+  padding-right: 18px;
+  position: relative;
+}
+
+.sort-by-desc:before,
+.sort-by-desc:after{
+  border: 4px solid transparent;
+  content: '';
+  display: block;
+  height: 0;
+  right: 5px;
+  top: 50%;
+  position: absolute;
+  width: 0;
+}
+
+.sort-by-desc:before{
+  border-bottom-color: #aaa;
+  margin-top: -9px;
+}
+
+.sort-by-desc:after{
+  border-top-color: #666;
+  margin-top: 1px;
+}
+
+.header-filter{
+  padding: 0 24px 0 24px !important;
+  position: relative;
+}
+
+mat-header-cell{
+  padding: 20px 24px 0 24px !important;
+  font-weight: bold !important;
+}

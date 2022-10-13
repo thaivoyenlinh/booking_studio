@@ -1,0 +1,19 @@
+<mat-toolbar class="toolbar">
+  <button mat-icon-button (click)="toggleSideBar()" class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>person_outline</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>exit_to_app</mat-icon>
+      Sign out
+    </button>
+  </mat-menu>
+</mat-toolbar>

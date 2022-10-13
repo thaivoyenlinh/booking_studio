@@ -1,0 +1,57 @@
+@import '../../../shared/theme/theme-variable.scss';
+
+.container {
+  height: 100%;
+  position: relative;
+  background-image: linear-gradient(
+        to right,
+         #49D0Db 15%,
+         #870cd3,
+         $backgroundmix-color1
+        
+    );
+
+  .sign-in-content {
+      position: absolute;
+      width: 32%;
+      margin: 200px 34%;
+      text-align: center;
+      background: honeydew;
+      border-radius: 8px;
+      
+      .name {
+          margin-top: 23px;
+          height: 40px;
+          span {
+            font-size: 20px;
+            color: $color-grey;
+        }
+
+      }
+
+      form {
+
+          mat-form-field {
+              width: 70%;
+
+
+          }
+
+          .button {
+              button {
+                  height: 38px;
+                  margin: 10px 5px 20px 5px;
+                  background: $backgroundmix-color1;
+                  color: rgb(234, 248, 234);
+                  cursor: pointer;
+        
+                  &:hover {
+                    background: rgb(234, 248, 234);
+                    transition: 0.4s;
+                    color: $backgroundmix-color1;
+                  }
+                }
+          }
+      }
+  }
+}

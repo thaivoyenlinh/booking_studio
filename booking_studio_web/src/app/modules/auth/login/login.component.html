@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="sign-in-content">
+      <div class="name">
+          <span>Sign In</span>
+      </div>
+      <form [formGroup]="SignInForm" (ngSubmit)="SignInForm.valid && onSubmit()">
+          
+          <div class="form-group">
+              <mat-form-field>
+                  <mat-label>Username</mat-label>
+                  <input matInput formControlName="username">
+              </mat-form-field>
+          </div>
+
+          <div class="form-group">
+              <mat-form-field>
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" formControlName='password'>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+                  </button>
+              </mat-form-field>
+          </div>
+
+          <div class="form-group">
+              <div class="button">
+                  <button mat-raised-button type="submit" >Login</button>
+                  <button mat-raised-button (click)="router.navigateByUrl('/')">Back</button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>
