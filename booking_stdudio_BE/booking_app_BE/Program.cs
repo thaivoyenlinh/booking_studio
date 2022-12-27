@@ -1,16 +1,30 @@
 using booking_app_BE.Apis.Employee;
 using booking_app_BE.Apis.Identity.Services.Token;
+using booking_app_BE.Businesses.Boundaries.Absence;
+using booking_app_BE.Businesses.Boundaries.Customer;
 using booking_app_BE.Businesses.Boundaries.Employee;
+using booking_app_BE.Businesses.Boundaries.MapEmployeeToService;
+using booking_app_BE.Businesses.Boundaries.Receipt;
+using booking_app_BE.Businesses.Boundaries.Schedule;
+using booking_app_BE.Businesses.Boundaries.Service;
+using booking_app_BE.Businesses.Interactors.Absence;
+using booking_app_BE.Businesses.Interactors.Customer;
 using booking_app_BE.Businesses.Interactors.Employee;
+using booking_app_BE.Businesses.Interactors.MapEmployeeToService;
+using booking_app_BE.Businesses.Interactors.Receipt;
+using booking_app_BE.Businesses.Interactors.Schedule;
+using booking_app_BE.Businesses.Interactors.Service;
 using booking_app_BE.Businesses.Services;
 using booking_app_BE.Core.AutoInit;
 using booking_app_BE.Database;
+using booking_app_BE.Database.Entity;
 using booking_app_BE.Database.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,18 +74,75 @@ builder.Services.AddAuthentication(opt => {
 //To use service in controller
 ////builder.Services.InitializeServices(ServiceLifetime.Scoped);
 //Employee Api
- 
-    builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-    builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-    
-    builder.Services.AddScoped<IAddEmployee, AddEmployee>();
-    builder.Services.AddScoped<IGetEmployees, GetEmployees>();
-    builder.Services.AddScoped<IGetEmployeeDetails, GetEmployeeDetails>();
-    builder.Services.AddScoped<IUpdateEmployee, UpdateEmployee>();
-    builder.Services.AddScoped<IDeleteEmployee, DeleteEmployee> ();
-   
-//builder.Services.AddScoped<>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+    
+builder.Services.AddScoped<IAddEmployee, AddEmployee>();
+builder.Services.AddScoped<IGetEmployees, GetEmployees>();
+builder.Services.AddScoped<IGetEmployeeDetails, GetEmployeeDetails>();
+builder.Services.AddScoped<IUpdateEmployee, UpdateEmployee>();
+builder.Services.AddScoped<IDeleteEmployee, DeleteEmployee> ();
+builder.Services.AddScoped<IUpdateAvatarEmployee, UpdateAvatarEmployee>();
+
+//Service Api
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IServiceService, ServiceService>();
+builder.Services.AddScoped<IAddService, AddService>();
+builder.Services.AddScoped<IGetServices, GetServices>();
+builder.Services.AddScoped<IGetServiceDetails, GetServiceDetails>();
+builder.Services.AddScoped<IUpdateService, UpdateService>();
+builder.Services.AddScoped<IDeleteService, DeleteService>();
+builder.Services.AddScoped<IUpdateBanner, UpdateBanner>();
+builder.Services.AddScoped<IGetBanners, GetBanners>();
+
+//Customer Api
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IAddCustomer, AddCustomer>();
+builder.Services.AddScoped<IGetCustomerDetails, GetCustomerDetails>();
+builder.Services.AddScoped<IUpdateCustomer, UpdateCustomer>();
+builder.Services.AddScoped<IUpdateAvatarCustomer, UpdateAvatarCustomer>();
+builder.Services.AddScoped<IGetAllCustomer, GetAllCustomer>();
+builder.Services.AddScoped<IGetCustomers, GetCustomers>();
+
+//MapEmployeeToService Api
+builder.Services.AddScoped<IMapEmployeeToServiceService, MapEmployeeToServiceService>();
+builder.Services.AddScoped<IMapEmployeeToServiceRepository, MapEmployeeToServiceRepository>();
+builder.Services.AddScoped<IGetEmployeesByServiceId, GetEmployeesByServiceId>();
+builder.Services.AddScoped<IAddMapEmployeeToService, AddMapEmployeeToService>();
+
+//Schedule Api
+builder.Services.AddScoped<IScheduleRepository, ScheduleRepository>();
+builder.Services.AddScoped<IScheduleService, ScheduleService>();
+builder.Services.AddScoped<IAddSchedule, AddSchedule>();
+builder.Services.AddScoped<IGetBookingDaysByEmployee, GetBookingDaysByEmployee>();
+builder.Services.AddScoped<IUpdateStatusSchedule, UpdateStatusSchedule>();
+builder.Services.AddScoped<IGetSchedulesByCustomer, GetSchedulesByCustomer>();
+builder.Services.AddScoped<IUpdateRatingSchedule, UpdateRatingSchedule>();
+builder.Services.AddScoped<IGetRatingBySchedule, GetRatingBySchedule>();
+builder.Services.AddScoped<IUpdateRescheduleSchedule, UpdateRescheduleSchedule>();
+builder.Services.AddScoped<IGetScheduleDetails, GetScheduleDetails>();
+builder.Services.AddScoped<IGetSchedulesByEmployee, GetSchedulesByEmployee>();
+builder.Services.AddScoped<IGetSchedules, GetSchedules>();
+
+//Receipt Api
+builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
+builder.Services.AddScoped<IReceiptService, ReceiptService>();
+builder.Services.AddScoped<IReceiptChart, ReceiptChart>();
+
+//Absence Api
+builder.Services.AddScoped<IAbsenceRepository, AbsenceRepository>();
+builder.Services.AddScoped<IAbsenceService, AbsenceService>();
+builder.Services.AddScoped<IGetDayOffByEmployee, GetDayOffByEmployee>();
+builder.Services.AddScoped<IAddAbsence, AddAbsence>();
+builder.Services.AddScoped<IGetAbsencesByEmployee, GetAbsencesByEmployee>();
+builder.Services.AddScoped<IUpdateStatusAbsence, UpdateStatusAbsence>();
+builder.Services.AddScoped<IGetAbsences, GetAbsences>();
+builder.Services.AddScoped<IRemoveServiceFromBanner, RemoveServiceFromBanner>();
+
+//builder.Services.AddScoped<>();
 
 
 builder.Services.AddSwaggerGen(opt =>

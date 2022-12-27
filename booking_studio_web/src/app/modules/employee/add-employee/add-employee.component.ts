@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { switchMap, tap } from 'rxjs';
 import { EmployeeService } from 'src/app/cores/https/employee/employee.service';
 
 @Component({
@@ -31,6 +32,7 @@ export class AddEmployeeComponent implements OnInit {
       badgeId: [this.badgeId],
       firstName: [''],
       lastName: [''],
+      phoneNumber:[''],
       email: [''],
       fileUpload: [''],
     });
@@ -39,14 +41,24 @@ export class AddEmployeeComponent implements OnInit {
   clkSave() {
     setTimeout(() => {
       this.employeeService
-        .addEmployee(this.addEmployeeForm.value)
-        .subscribe((res) => {
-          console.log(res['status']);
-          if (res['status']) {
-            this.data.yesFunc();
-            this.dialogRef.close(true);
-          }
-        });
+        .createEmployeeAccount(this.addEmployeeForm.value)
+        .pipe(
+          tap((res) => console.log('response createEmployeeAccount', res)),
+          switchMap((res) =>
+            this.employeeService
+              .addEmployee(this.addEmployeeForm.value, JSON.parse(res))
+              .pipe(
+                tap((res) => {
+                  console.log(res['status']);
+                  if (res['status']) {
+                    this.data.yesFunc();
+                    this.dialogRef.close(true);
+                  }
+                })
+              )
+          )
+        )
+        .subscribe();
     }, 500);
   }
 }

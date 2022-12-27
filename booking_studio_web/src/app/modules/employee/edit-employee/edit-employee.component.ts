@@ -38,7 +38,8 @@ export class EditEmployeeComponent implements OnInit {
       badgeId: [this.dataReceive.badgeId, Validators.required],
       firstName: [this.firstName, Validators.required],
       lastName: [this.lastName, Validators.required],
-      email: [this.dataReceive.email, Validators.required]
+      email: [this.dataReceive.email, Validators.required],
+      phoneNumber: [this.dataReceive.phoneNumber, Validators.required]
     });
   }
 
@@ -59,6 +60,7 @@ export class EditEmployeeComponent implements OnInit {
       this.employeeEdit.firstName = this.editEmployeeForm.controls["firstName"].value;
       this.employeeEdit.lastName = this.editEmployeeForm.controls["lastName"].value;
       this.employeeEdit.email = this.editEmployeeForm.controls["email"].value;
+      this.employeeEdit.phoneNumber = this.editEmployeeForm.controls["phoneNumber"].value;
       this.employeeService.updateEmployee(this.employeeEdit).subscribe((res) => {
         if(res.status === 200){
           this.dialogRef.close(true);

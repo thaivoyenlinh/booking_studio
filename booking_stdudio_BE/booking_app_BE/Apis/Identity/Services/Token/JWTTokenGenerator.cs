@@ -19,7 +19,8 @@ namespace booking_app_BE.Apis.Identity.Services.Token
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email)
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.NameId, user.Id),
             };
             foreach(var role in roles)
             {

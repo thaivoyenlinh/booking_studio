@@ -12,7 +12,7 @@ namespace booking_app_BE.Businesses.Interactors.Employee
         {
             _employeeService = employeeService;
         }
-        public async Task<Database.Entity.Employee> ExecuteAsync(IGetEmployeeDetails.Request request)
+        public async Task<IGetEmployeeDetails.Response> ExecuteAsync(IGetEmployeeDetails.Request request)
         {
             return await _employeeService.GetEmployeeDetails(request);
         }

@@ -6,6 +6,10 @@ import { EmployeeComponent } from './modules/employee/employee.component';
 import { HomeComponent } from './modules/home/home.component';
 import { ServiceComponent } from './modules/service/service.component';
 import { AuthGuard } from './cores/guards/auth.guard';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { CustomerComponent } from './modules/customer/customer.component';
+import { ScheduleComponent } from './modules/schedule/schedule.component';
+import { EmployeeManagementComponent } from './modules/employee-management/employee-management.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: "full" },
@@ -14,11 +18,15 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: 'dashboard', component: DashboardComponent },
       {
         path: 'employee',
         component: EmployeeComponent,
       },
+      { path: 'employee-management', component: EmployeeManagementComponent},
       { path: 'service', component: ServiceComponent },
+      { path: 'customer', component: CustomerComponent },
+      { path: 'schedule', component: ScheduleComponent}
     ],
   },
   { path: 'register', component: RegisterComponent },

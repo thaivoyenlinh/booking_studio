@@ -141,3 +141,35 @@ mat-header-cell{
   padding: 20px 24px 0 24px !important;
   font-weight: bold !important;
 }
+
+.mat-tab-labels{
+  justify-content: space-between;
+}
+
+.mat-radio-group{
+  margin-bottom: 15px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 18px;
+}
+
+.edit-icon{
+  color: rgb(255, 105, 180);
+}
+
+.details-icon{
+  color: rgb(42, 163, 42);
+}
+
+.delete-icon{
+  color: rgb(224, 65, 65);
+}
+
+.button-confirm{
+  font-size: 11px;
+  background-color: green;
+  color: white;
+  line-height: 24px !important;
+  padding: 0px 14px !important;
+}

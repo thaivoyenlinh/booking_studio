@@ -3,6 +3,7 @@
   {{ data.content }}
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close autofocus (click)="clkNo()">NO</button>
-  <button mat-button [mat-dialog-close]="true" (click)="clkYes()">YES</button>
+  <button *ngIf="data.okFunc" mat-button mat-dialog-close autofocus (click)="clkOk()">OK</button>
+  <button *ngIf="data.noFunc" mat-button mat-dialog-close autofocus (click)="clkNo()">NO</button>
+  <button *ngIf="data.yesFunc" mat-button [mat-dialog-close]="true" (click)="clkYes()">YES</button>
 </mat-dialog-actions>

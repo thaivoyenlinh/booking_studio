@@ -1,0 +1,25 @@
+<div class="page-title">
+  <span>Service Information</span>
+</div>
+<div class="wrap">
+  <span class="field-name">Category: </span>
+  <span>{{data.category}}</span>
+</div>
+<div class="wrap">
+  <span class="field-name">Type: </span>
+  <span>{{data.type}}</span>
+</div>
+<div class="wrap">
+  <span class="field-name">Name: </span>
+  <span>{{data.serviceName}}</span>
+</div>
+<div class="wrap">
+  <span class="field-name">Details: </span>
+  <span>{{data.serviceDetails}}</span>
+</div>
+<div class="wrap">
+  <span class="field-name">Image: </span>
+  <div class="image" *ngFor="let image of data.image">
+    <img src="https://localhost:5001/Images/Services/{{image}}" height="70" width="70">
+  </div>
+</div>

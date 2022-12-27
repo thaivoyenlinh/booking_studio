@@ -1,0 +1,49 @@
+<div class="page-title">
+  <span>Dashboard</span>
+</div>
+
+<!-- Card -->
+<div class="listcard">
+  <div class="cardBox">
+    <div class="card">
+      <div>
+        <div class="number">{{numberOfCustomer}}</div>
+        <div class="cardName">User</div>
+      </div>
+      <div class="iconBox">
+        <mat-icon>remove_red_eye</mat-icon>
+      </div>
+    </div>
+    <div class="card">
+      <div>
+        <div class="number">{{numberOfService}}</div>
+        <div class="cardName">Service</div>
+      </div>
+      <div class="iconBox">
+        <mat-icon>add_a_photo</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div class="cardBox">
+</div>
+
+<div class="bloc-chart">
+  <div class="header-chart">
+    <div class="title-chart">
+      <div>Monthly revenue statistics</div>
+    </div>
+    <!-- <div class="select-year"> -->
+      <mat-form-field class="select-year" appearance="outline">
+        <mat-select (selectionChange)="handleSelectYear()" [formControl]="selectYearForChart">
+          <mat-option value="2022">Current Year</mat-option>
+          <mat-option value="2021">2021</mat-option>
+          <mat-option value="2020">2020</mat-option>
+        </mat-select>
+      </mat-form-field>
+    <!-- </div> -->
+  </div>
+  <div class="chart">
+    <canvas id="revenueChart" height="100%"></canvas>
+  </div>
+</div>
+<div class="bottom"></div>

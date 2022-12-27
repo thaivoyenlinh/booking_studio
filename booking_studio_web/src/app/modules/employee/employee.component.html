@@ -1,6 +1,6 @@
-<div class="page-title">
+<!-- <div class="page-title">
   <span>Employee</span>
-</div>
+</div> -->
 <div class="active-button">
   <button mat-flat-button class="button-add button-main-flat" (click)="clkAddEmployee()">+ Add Employee</button>
 </div>
@@ -43,8 +43,9 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
       <mat-cell *matCellDef="let element"> 
-        <mat-icon (click)="clkEdit(element)">edit</mat-icon>
-        <mat-icon (click)="clkDelete(element)">delete</mat-icon>
+        <mat-icon class="edit-icon" (click)="clkEdit(element)">edit</mat-icon>
+        <mat-icon class="details-icon" (click)="clkInformationDetails(element)">info</mat-icon>
+        <mat-icon class="delete-icon" (click)="clkDelete(element)">delete</mat-icon>
       </mat-cell>
     </ng-container>
 

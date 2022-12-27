@@ -10,7 +10,7 @@ import { AuthGuard } from './cores/guards/auth.guard';
 import { HomeModule } from './modules/home/home.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoadingComponent } from './shared/components/loading/loading.component';
-import { LoadingService } from './shared/components/loading/loading.service';
+import { EditCustomerComponent } from './modules/customer/edit-customer/edit-customer.component';
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -19,7 +19,8 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent
+    LoadingComponent,
+    EditCustomerComponent,
   ],
   imports: [
     BrowserModule,

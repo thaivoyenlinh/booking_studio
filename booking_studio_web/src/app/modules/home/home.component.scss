@@ -22,3 +22,7 @@ mat-drawer-content{
   padding: 40px;
   background-color: $color-lightgrey;
 }
+
+::ng-deep .mat-drawer-content{
+  background-color:aliceblue !important;
+}

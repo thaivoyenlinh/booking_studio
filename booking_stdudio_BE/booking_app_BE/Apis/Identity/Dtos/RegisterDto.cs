@@ -8,4 +8,11 @@
         public string Role { get; set; }
 
     }
+
+    /*public enum Role
+    {
+        Manager,
+        Employee,
+        Customer
+    }*/
 }

@@ -1,0 +1,51 @@
+@import '../../../shared/theme/theme-variable.scss';
+
+.dialog-confirmation {
+  width: 800px;
+
+  .dialog-confirmation-content {
+    padding: 30px 50px 0;
+    margin-bottom: 20px;
+    background-color: $color-background;
+    font-size: 13px;
+    overflow: none;
+    margin-left: -23px;
+    width: 900px;
+
+    .titleEditSurvey {
+      font-weight: bold;
+    }
+
+    .group {
+      display: flex;
+      align-items: center;
+
+      mat-form-field {
+        flex:1;
+      }
+
+      .action-min-width {
+        min-width: 130px;
+      }
+    }
+
+    .groups{
+      display: flex;
+      align-items: center;
+
+      mat-form-field{
+        width:300px !important;
+     }
+    }
+
+    .label {
+      min-width: 100px;
+    }
+  }
+
+  .action {
+    padding: 0px 20px 0px 20px;
+    margin: 0;
+    justify-content: center;
+  }
+}

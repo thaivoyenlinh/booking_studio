@@ -10,7 +10,10 @@ namespace booking_app_BE.Businesses.Services
     {
         Task<IAddEmployee.Response> CreateEmployee(IAddEmployee.Request request);
         Task<PaginatedList<dynamic>> GetEmployee(IGetEmployees.Request request);
-        Task<Employee> GetEmployeeDetails(IGetEmployeeDetails.Request request);
+        Task<IGetEmployeeDetails.Response> GetEmployeeDetails(IGetEmployeeDetails.Request request);
         Task UpdateEmployee(IUpdateEmployee.Request request);
+        Task<List<IGetEmployeesByServiceId.DetailsEmployee>> GetEmployeesByService(List<int> employeeId);
+        Task UpdateAvatarEmployee(IUpdateAvatarEmployee.RequestUpdateAvatar request);
+
     }
 }

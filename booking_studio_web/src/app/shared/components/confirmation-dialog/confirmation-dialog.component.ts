@@ -15,6 +15,7 @@ export class ConfirmationDialogComponent implements OnInit {
       content: string;
       yesFunc?: (value?: any) => any;
       noFunc?: (value?: any) => any;
+      okFunc?: (value?: any) => any;
     }
   ) { }
 
@@ -30,6 +31,12 @@ export class ConfirmationDialogComponent implements OnInit {
   clkNo(){
     if(this.data.noFunc){
       this.data.noFunc();
+    }
+  }
+
+  clkOk(){
+    if(this.data.okFunc){
+      this.data.okFunc();
     }
   }
 

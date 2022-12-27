@@ -1,0 +1,85 @@
+<div class="page-title">
+  <span>Customer</span>
+</div>
+<div class="table-employee">
+  <mat-table [dataSource]="customerList$ | async">
+    <ng-container matColumnDef="fullName">
+      <mat-header-cell *matHeaderCellDef>
+        Fullname
+        <!-- <span class="clickable" (click)="handleSorting(sortBy.name)">Name</span>  
+        <span [ngClass]="showDirectionIcon(sortBy.name)"></span> -->
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fullName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nameFilter">
+      <mat-header-cell *matHeaderCellDef class="header-filter">
+        <mat-form-field appearance="standard">
+          <input matInput 
+            type="string" 
+            placeholder="Enter..." 
+            #inputName
+            [value]="(customerListQuerySubject$ | async).name || ''"
+            (input)="nameFilterSubject$.next(inputName.value)"
+          >
+        </mat-form-field>
+      </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef>
+        Address
+        <!-- <span class="clickable" (click)="handleSorting(sortBy.badgeId)">BadgeId</span>  
+        <span [ngClass]="showDirectionIcon(sortBy.badgeId)"></span> -->
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="addressFilter">
+      <mat-header-cell *matHeaderCellDef class="header-filter address-customer">
+        <mat-form-field appearance="standard">
+          <input matInput 
+            type="string" 
+            placeholder="Enter..." 
+            #inputName
+            [value]="(customerListQuerySubject$ | async).address || ''"
+            (input)="addressFilterSubject$.next(inputName.value)"
+          >
+        </mat-form-field>
+      </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+      <mat-header-cell *matHeaderCellDef> Phone Number </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.phoneNumber}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="phoneNumberFilter">
+      <mat-header-cell *matHeaderCellDef>
+      </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+        <!-- <mat-icon class="edit-icon" (click)="clkEdit(element)">edit</mat-icon>
+        <mat-icon class="delete-icon" (click)="clkDelete(element)">delete</mat-icon> -->
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actionFilter">
+      <mat-header-cell *matHeaderCellDef>
+      </mat-header-cell>
+    </ng-container>
+
+    <mat-header-row class="mat-header-row-title" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumnFilters; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+<div class="paginator">
+  <mat-paginator #paginator 
+    showFirstLastButtons 
+    [pageSizeOptions]="pagination.pageSizeOptions" 
+    (page)="onPageChange($event)"
+    [pageIndex]="pagination.pageIndex"
+    [pageSize]="pagination.pageSize"
+    [length]="pagination.totalRecords">
+  </mat-paginator>
+</div>

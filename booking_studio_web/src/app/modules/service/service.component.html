@@ -1,1 +1,167 @@
-<p>service works!</p>
+<div class="service-page">
+  <div class="page-title">
+    <span>Service</span>
+  </div>
+
+  <div class="active-button">
+    <button mat-flat-button class="button-add button-main-flat" (click)="clkAddService()">+ Add Service</button>
+    <button mat-flat-button class="first-button button-add button-main-flat" (click)="clkAddBannerService()">Add Banner</button>
+  </div>
+  <div class="table-service">
+    <mat-table [dataSource]="serviceList$ | async">
+      <ng-container matColumnDef="selectFilter">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+      </ng-container>  
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="select"></span>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef>
+          Category
+          <!-- <span class="clickable" (click)="handleSorting(sortBy.name)">Name</span>  
+          <span [ngClass]="showDirectionIcon(sortBy.name)"></span> -->
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="categoryFilter">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-form-field >
+            <mat-select [(value)]="selectedCategory">
+              <mat-option [value]="selectAllOption.Value" (onSelectionChange)="changeCategory($event)"> {{selectAllOption.Text}} </mat-option>
+              <mat-option *ngFor="let category of categoryList" [value]="category.Value" 
+                      (onSelectionChange)="changeCategory($event)">
+                {{category.Text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-header-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef>
+          Type
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="typeFilter">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-form-field >
+            <mat-select [(value)]="selectedType">
+              <mat-option [value]="selectAllOption.Value" (onSelectionChange)="changeType($event)"> {{selectAllOption.Text}} </mat-option>
+              <mat-option *ngFor="let type of typeList" [value]="type.Value" 
+                      (onSelectionChange)="changeType($event)">
+                {{type.Text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-header-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="serviceName">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.serviceName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="serviceNameFilter">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-form-field appearance="standard">
+            <input matInput 
+              type="string" 
+              placeholder="Enter..." 
+              #inputName
+              [value]="(servicesListQuerySubject$ | async).serviceName || ''"
+              (input)="serviceNameFilterSubject$.next(inputName.value)"
+            >
+          </mat-form-field>
+        </mat-header-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{formatNumber(element.price)}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="priceFilter">
+        <mat-header-cell *matHeaderCellDef>
+          <span class="clickable" (click)="handleSorting(sortBy.price)">Name</span>  
+          <span [ngClass]="showDirectionIcon(sortBy.price)"></span>
+        </mat-header-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.status | status}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="statusFilter">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-form-field >
+            <mat-select [(value)]="selectedStatus">
+              <mat-option [value]="selectAllOption.Value" (onSelectionChange)="changeStatus($event)"> {{selectAllOption.Text}} </mat-option>
+              <mat-option *ngFor="let status of statusList" [value]="status.Value" 
+                      (onSelectionChange)="changeStatus($event)">
+                {{status.Text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-header-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+          <mat-icon class="edit-icon" (click)="clkEdit(element)">edit</mat-icon>
+          <mat-icon class="details-icon" (click)="clkInformationDetails(element)">info</mat-icon>
+          <mat-icon class="delete-icon" (click)="clkDelete(element)">delete</mat-icon>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actionFilter">
+        <mat-header-cell *matHeaderCellDef>
+        </mat-header-cell>
+      </ng-container>
+
+      <mat-header-row class="mat-header-row-title" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-header-row class="mat-header-row-filter" *matHeaderRowDef="displayedColumnFilters; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+  <div class="paginator">
+    <mat-paginator #paginator 
+      showFirstLastButtons 
+      [pageSizeOptions]="pagination.pageSizeOptions" 
+      (page)="onPageChange($event)"
+      [pageIndex]="pagination.pageIndex"
+      [pageSize]="pagination.pageSize"
+      [length]="pagination.totalRecords">
+    </mat-paginator>
+  </div>
+
+  <div class="image-banner">
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Image To Slider
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="banner" *ngFor="let service of listBannersService">
+        <img src="https://localhost:5001/Images/Services/{{service.imageBanner}}" width="70px" height="70px">
+        <div class="service-name">
+          <div class="name">{{service.serviceName}}</div>
+          <button mat-flat-button class="button-banner" (click)="clkConfirm(service.id)">Delete</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>

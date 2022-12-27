@@ -11,7 +11,8 @@
         public enum SortHeader
         {
             Name,
-            BadgeId
+            BadgeId,
+            Rating
         }
     }
 }

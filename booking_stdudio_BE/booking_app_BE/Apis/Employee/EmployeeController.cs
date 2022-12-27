@@ -9,28 +9,31 @@ namespace booking_app_BE.Apis.Employee
     [Route("employee")]
     public class EmployeeController : ControllerBase
     {
-        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IAddEmployee _addEmployee;
         private readonly IGetEmployees _getEmployees;
         private readonly IGetEmployeeDetails _getEmployeeDetails;
         private readonly IUpdateEmployee _updateEmployee;
         private readonly IDeleteEmployee _deleteEmployee;
+        private readonly IGetEmployeesByServiceId _getEmployeesByServiceId;
+        private readonly IUpdateAvatarEmployee _updateAvatarEmployee;
 
         public EmployeeController(
-            IWebHostEnvironment webHostEnvironment,
             IAddEmployee addEmployee,
             IGetEmployees getEmployees,
             IGetEmployeeDetails getEmployeeDetails,
             IUpdateEmployee updateEmployee,
-            IDeleteEmployee deleteEmployee
+            IDeleteEmployee deleteEmployee,
+            IGetEmployeesByServiceId getEmployeesByServiceId,
+            IUpdateAvatarEmployee updateAvatarEmployee
             )
         {
-            _webHostEnvironment = webHostEnvironment;
             _addEmployee = addEmployee;
             _getEmployees = getEmployees;
             _getEmployeeDetails = getEmployeeDetails;
             _updateEmployee = updateEmployee;
             _deleteEmployee = deleteEmployee;
+            _getEmployeesByServiceId = getEmployeesByServiceId;
+            _updateAvatarEmployee = updateAvatarEmployee;
         }
 
         [HttpPost("add")]
@@ -55,7 +58,7 @@ namespace booking_app_BE.Apis.Employee
             return Ok(response);
         }
 
-        [HttpGet("details")]
+        [HttpPost("details")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetEmployeeDetails([FromQuery] IGetEmployeeDetails.Request request)
         {
@@ -80,5 +83,19 @@ namespace booking_app_BE.Apis.Employee
             return Ok(response);
         }
 
+        [HttpGet("getEmployeesByServiceId")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<List<IGetEmployeesByServiceId.DetailsEmployee>> GetEmployeesByServiceId([FromQuery] int serviceId)
+        {
+            return await _getEmployeesByServiceId.ExecuteAsync(serviceId);
+        }
+
+        [HttpPost("updateImageAvatar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateImageAvatar([FromForm] IUpdateAvatarEmployee.RequestUpdateAvatar request)
+        {
+            await _updateAvatarEmployee.UpdateAsync(request);
+            return Ok();
+        }
     }
 }

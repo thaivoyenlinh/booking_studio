@@ -1,0 +1,68 @@
+<!-- <div class="page-title">
+  <span>Employee</span>
+</div> -->
+<!-- <div class="active-button">
+  <button mat-flat-button class="button-add button-main-flat" (click)="clkAddEmployee()">+ Add Employee</button>
+</div> -->
+<div class="table-employee">
+  <mat-table [dataSource]="employeeList$ | async">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>
+        Employee Name
+        <!-- <span class="clickable" (click)="handleSorting(sortBy.name)">Name</span>  
+        <span [ngClass]="showDirectionIcon(sortBy.name)"></span> -->
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.employeeName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nameFilter">
+      <mat-header-cell *matHeaderCellDef class="header-filter">
+        <mat-form-field appearance="standard">
+          <input matInput 
+            type="string" 
+            placeholder="Enter..." 
+            #inputName
+            [value]="(absenceListQuerySubject$ | async).name || ''"
+            (input)="nameFilterSubject$.next(inputName.value)"
+          >
+        </mat-form-field>
+      </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef>
+        Date
+        <!-- <span class="clickable" (click)="handleSorting(sortBy.badgeId)">BadgeId</span>  
+        <span [ngClass]="showDirectionIcon(sortBy.badgeId)"></span> -->
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+        <button *ngIf="element.status == 'Pending'" mat-flat-button class="button-confirm" (click)="clkConfirm(element.id)">Confirm</button>
+        <!-- <mat-icon (click)="clkEdit(element)">edit</mat-icon> -->
+        <!-- <mat-icon (click)="clkDelete(element)">delete</mat-icon> -->
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row class="mat-header-row-title" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumnFilters; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+<div class="paginator">
+  <mat-paginator #paginator 
+    showFirstLastButtons 
+    [pageSizeOptions]="pagination.pageSizeOptions" 
+    (page)="onPageChange($event)"
+    [pageIndex]="pagination.pageIndex"
+    [pageSize]="pagination.pageSize"
+    [length]="pagination.totalRecords">
+  </mat-paginator>
+</div>

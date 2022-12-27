@@ -4,7 +4,11 @@ export interface IEmployeeDetail {
   name: string; 
   email: string;
   image: string;
-  status: number;
+  username: string;
+  password: string;
+  phoneNumber: string;
+  employeeAccountId: string;
+  rating: number;
 }
 
 export interface IEmployeesListQuery {
@@ -36,4 +40,10 @@ export class EmployeeEdit{
   firstName: string;
   lastName: string;
   email: string;
+  phoneNumber: string;
+}
+
+export interface IAccountInfo {
+  userId: string;
+  passwordGenerate: string;
 }

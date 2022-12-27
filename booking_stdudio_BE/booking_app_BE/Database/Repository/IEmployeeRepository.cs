@@ -10,5 +10,6 @@ namespace booking_app_BE.Database.Repository
     {
         Task<IAddEmployee.Response> CreateEmployee(IAddEmployee.Request request);
         Task<IQueryable<dynamic>> GetEmployeeByCondition(string name, SortOrderDto.SortHeader? sortHeder, SortOrderDto.SortOrder? sortOrder);
+        Task<List<IGetEmployeesByServiceId.DetailsEmployee>> GetEmployeesByService(List<int> employeeIdList);
     }
 }

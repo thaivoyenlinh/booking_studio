@@ -1,0 +1,64 @@
+<form id="dlgEditService" class="dialog-confirmation" [formGroup]="editServiceForm">
+  <div class="dialog-confirmation-heading" mat-dialog-title>
+    <div class="text">Edit Service</div>
+  </div>
+  <div class="dialog-confirmation-content">
+    <div class="group">
+      <mat-label class="label">Category</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categoryList" 
+              [value]="category.Value" >
+            {{category.Text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Type</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of typeList" 
+              [value]="type.Value" >
+            {{type.Text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Service Name</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="serviceName">
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Service Details</mat-label>
+      <mat-form-field appearance="outline">
+        <textarea matInput formControlName="serviceDetails"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Price</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="price">
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Status</mat-label>
+      <mat-radio-group aria-label="Select an option" formControlName="status" class="mat-radio-group">
+        <mat-radio-button *ngFor="let item of status" [value]="item.Value">
+          {{ item.Text }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <mat-dialog-actions class="action">
+    <button mat-flat-button class="button-cancel" matDialogClose="false">
+      Cancel
+    </button>
+    <button mat-flat-button class="button-save" (click)="clkSave()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>
+

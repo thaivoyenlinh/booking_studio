@@ -1,0 +1,87 @@
+<form id="dlgAddEmployee" class="dialog-confirmation" [formGroup]="addServiceForm">
+  <div class="dialog-confirmation-heading" mat-dialog-title>
+    <div class="text">Add Service</div>
+  </div>
+  <div class="dialog-confirmation-content">
+    <div class="groups">
+      <mat-label class="label">Category</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Choose an option...</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of data.categoryList" 
+                  [value]="category.Value">
+            {{category.Text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-label class="label">Type</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Choose an option...</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of data.typeList" 
+                [value]="type.Value">
+            {{type.Text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Service Name</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="serviceName">
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Service Details</mat-label>
+      <mat-form-field appearance="outline">
+        <textarea matInput formControlName="serviceDetails"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="groups">
+      <mat-label class="label">Price</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="price">
+      </mat-form-field>
+      <mat-label class="label">Discount</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Choose an option...</mat-label>
+        <mat-select formControlName="discount">
+          <mat-option *ngFor="let discount of discountOptions" 
+                [value]="discount.Value">
+            {{ discount.Text }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Status</mat-label>
+      <mat-radio-group aria-label="Select an option" formControlName="status">
+        <mat-radio-button *ngFor="let item of status" [value]="item.Value">
+          {{ item.Text }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="group">
+      <mat-label class="label">Banner</mat-label>
+      <mat-form-field appearance="outline">
+        <ngx-mat-file-input formControlName="fileUploadBanner" placeholder="Choose a file" [accept]="'image/jpeg, image/png'" [multiple]="false"></ngx-mat-file-input>
+        <mat-icon matSuffix>folder</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="group">
+      <mat-label class="label">Image</mat-label>
+      <mat-form-field appearance="outline">
+        <ngx-mat-file-input formControlName="fileUpload" placeholder="Choose a file" [accept]="'image/jpeg, image/png'" [multiple]="true"></ngx-mat-file-input>
+        <mat-icon matSuffix>folder</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-dialog-actions class="action">
+    <button mat-flat-button class="button-cancel" matDialogClose="false">
+      Cancel
+    </button>
+    <button mat-flat-button class="button-save" (click)="clkSave()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

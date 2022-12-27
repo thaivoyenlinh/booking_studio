@@ -1,0 +1,100 @@
+@import '../../shared/theme/theme-variable.scss';
+
+
+
+.bloc-chart{
+  background-color: white;
+  // border: 1px solid red;
+
+  .header-chart{
+    padding: 20px 30px;
+    // border: 1px solid black;
+
+    // .select-year{
+      mat-form-field {
+        float: right;
+        width: 160px;
+      }
+    // }
+
+    .title-chart{
+      padding-top: 20px;
+      color: rgb(87, 85, 85);
+      font-size: 1.5em;
+      display: inline-block;
+      // border: 1px solid black;
+    }
+  }
+}
+
+.chart{
+  background-color: white;
+  margin-top: 40px;
+  padding: 20px 30px;
+  // border: 1px solid black;
+}
+
+.bottom{
+  padding-top: 100px;
+}
+
+// .listcard{
+//   position: absolute;
+// }
+.cardBox {
+  position: relative;
+  width: 100%;
+  padding: 50px 20px 10px 0;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 30px;
+
+  .card{
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 7px 25px rgba(167, 165, 165, 0.88);
+    
+    &:hover {
+      background: linear-gradient(
+        to left top,
+        #49D0Db 15%,
+        #870cd3,
+        $backgroundmix-color1   
+        );
+        transition: background 3s ease-out;
+      // background: rgb(51, 51, 250);
+      .number{
+        color: white;
+      }
+      .cardName{
+        color: white;
+      }
+      .iconBox{
+        color: white;
+      }
+    }
+
+    .number{
+      position: relative;
+      font-weight: 500;
+      font-size: 2.5em;
+      color: rgb(51, 51, 250);
+    }
+
+    .cardName{
+      color: grey;
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+
+    .iconBox{
+      font-size: 3.5em;
+      color: grey;
+    }
+  }
+}
+

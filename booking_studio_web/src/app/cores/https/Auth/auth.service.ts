@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EmailValidator } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IUser } from 'src/app/models/authentication/user.model';
+import { IUser } from '../../../models/authentication/user.model';
 import { map } from "rxjs/operators";
 
 @Injectable({
@@ -13,10 +13,12 @@ export class AuthService {
   baseURL = 'https://localhost:5001';
   isLoggedIn: boolean;
   currentUser: IUser = {
-    username: null,
-    email: null,
-    result: null,
-    token: null,
+    id: '',
+    username: '',
+    email: '',
+    role: '',
+    token: '',
+    result: '',
   }
   constructor(private http: HttpClient) {}
 

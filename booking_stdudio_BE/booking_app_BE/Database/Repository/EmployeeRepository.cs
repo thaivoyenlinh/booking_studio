@@ -13,7 +13,8 @@ namespace booking_app_BE.Database.Repository
     {
         private readonly DbSet<Employee> _dbSet;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public EmployeeRepository(BookingStudioContext bookingStudioContext, IWebHostEnvironment webHostEnvironment) : base(bookingStudioContext)
+        public EmployeeRepository(BookingStudioContext bookingStudioContext, 
+            IWebHostEnvironment webHostEnvironment) : base(bookingStudioContext)
         {
             _dbSet = _dbContext.Set<Employee>();
             _webHostEnvironment = webHostEnvironment;
@@ -39,7 +40,10 @@ namespace booking_app_BE.Database.Repository
                         BadgeId = request.BadgeId,
                         Name = request.FirstName + ' ' + request.LastName,
                         Email = request.Email,
-                        Image = fileName
+                        Image = fileName,
+                        PhoneNumber = request.PhoneNumber,
+                        EmployeeAccountId = request.EmployeeAccountId,
+                        AccountPasswordGenerate = request.AccountPasswordGenerate
                     };
                     _dbContext.Set<Employee>().Add(employee);
                     await _dbContext.SaveChangesAsync();
@@ -67,7 +71,10 @@ namespace booking_app_BE.Database.Repository
                 badgeId = s.BadgeId,
                 name = s.Name,
                 email = s.Email,
-                image = s.Image
+                phone = s.PhoneNumber,
+                image = s.Image,
+                rating = _dbContext.Set<Schedule>().AsNoTracking().Where(e => e.EmployeeId == s.Id).Select(e => e.EmployeeRating).Average(),
+                employeeAccountId = s.EmployeeAccountId
             });
             
             switch (sortHeader)
@@ -82,10 +89,30 @@ namespace booking_app_BE.Database.Repository
                         ? result.OrderBy(x => x.badgeId).ThenBy(x => x.name)
                         : result.OrderByDescending(x => x.badgeId).ThenBy(x => x.name);
                     break;
+                case SortOrderDto.SortHeader.Rating:
+                    result = sortOrder == SortOrderDto.SortOrder.ASC
+                        ? result.OrderBy(x => x.rating).ThenBy(x => x.name)
+                        : result.OrderByDescending(x => x.rating).ThenBy(x => x.name);
+                    break;
             }
             await Task.Delay(1);
             return result;
         }
 
+        public async Task<List<IGetEmployeesByServiceId.DetailsEmployee>> GetEmployeesByService(List<int> employeeIdList)
+        {
+            return await _dbSet.AsNoTracking().Where(e => employeeIdList.Contains(e.Id))
+                .Select(e => 
+                    new IGetEmployeesByServiceId.DetailsEmployee {
+                        Id = e.Id,
+                        BadgeId = e.BadgeId,
+                        Name = e.Name,
+                        Email = e.Email,
+                        Image = e.Image,
+                        PhoneNumber = e.PhoneNumber
+                    }
+                 )
+                .ToListAsync();
+        }
     }
 }
